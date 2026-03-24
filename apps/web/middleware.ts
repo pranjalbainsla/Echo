@@ -13,14 +13,11 @@ const isOrgFreeRoute = createRouteMatcher([
   "/org-selection(.*)"
 ]);
 export default clerkMiddleware(async (auth, req)=> {
-  console.log("MIDDLEWARE RUNNING:", req.nextUrl.pathname);
   const { userId, orgId } = await auth();
 
   if(!isPublicRoute(req)){
     await auth.protect();
   }
-
-  
   // Logged in but NO org → force to org selection
   // (allow org-selection itself to pass through)
   if (

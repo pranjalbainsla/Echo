@@ -18,7 +18,6 @@ export default function Page() {
               <UserButton />
               <OrganizationSwitcher hidePersonal />
               <Button onClick={() => addUser()}>Add</Button>
-              {JSON.stringify(users, null, 2)}
             </div>
           </div>
         </div>
