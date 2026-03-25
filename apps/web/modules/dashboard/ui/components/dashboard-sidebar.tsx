@@ -15,7 +15,7 @@ import { usePathname } from "next/navigation";
 
 import { cn } from "@workspace/ui/lib/utils";
 import { Sidebar, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarGroupContent, SidebarRail, SidebarFooter } from "@workspace/ui/components/sidebar";
-import { title } from "node:process";
+
 
 const customerSupportItems = [
     {
