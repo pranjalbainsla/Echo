@@ -13,7 +13,7 @@ export const useVapi = () => {
     
     useEffect(() => {
         //only for testing the vapi api (customers will provide their own API keys)
-        const vapiInstance = new Vapi("7c349591-ca3f-4e7a-88d3-0c5b04594385");
+        const vapiInstance = new Vapi("");
         setVapi(vapiInstance);
 
         vapiInstance.on("call-start", () => {
@@ -61,7 +61,7 @@ export const useVapi = () => {
         setIsConnecting(true);
         if(vapi) {
             //only for testing the vapi api (customers will provide their own Assitant IDs)
-            vapi.start("81a8cd1b-57b4-4654-bf3e-f423b6bc2f4f");
+            vapi.start("");
         }
     }
     const endCall = () => {
