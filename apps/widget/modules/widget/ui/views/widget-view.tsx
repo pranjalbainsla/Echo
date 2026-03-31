@@ -4,7 +4,7 @@ import { useAtomValue } from "jotai";
 import  WidgetAuthScreen from "../screens/widget-auth-screen";
 import { screenAtom } from "../../atoms/widget-atoms";
 import { WidgetErrorScreen } from "../screens/widget-error-screen";
-import { WidgetLoadingScreen } from "../screens/widget-loading-screen.";
+import { WidgetLoadingScreen } from "../screens/widget-loading-screen";
 
 interface Props {
     organizationId: string;

@@ -79,12 +79,10 @@ export const WidgetLoadingScreen = ( {organizationId } : { organizationId: strin
             return;
         }
         setLoadingMessage("Validating contact session...");
-        if(validateContactSession?.valid){
-            setSessionValid(true);
-        }else{
-            setSessionValid(false);
-        }
-        setStep("done");
+        if(validateContactSession === undefined) return;
+        
+        setSessionValid(validateContactSession.valid);
+        setStep("done")
     }, [step, contactSessionId, validateContactSession, setLoadingMessage]);
     useEffect(() => {
         if(step !== "done") return;
