@@ -1,5 +1,8 @@
 import { ConvexError, v } from "convex/values";
 import { query, mutation } from "../_generated/server";
+import { supportAgent } from "../system/ai/agents/supportAgent";
+import { saveMessage } from "@convex-dev/agent";
+import { components } from "../_generated/api";
 
 export const create = mutation({
   args: {
@@ -14,8 +17,16 @@ export const create = mutation({
         message: "Invalid or expired contact session",
       });
     }
-    const threadId = "123"; //todo: generate thread id based on session and organization
-
+    const { threadId } = await supportAgent.createThread(ctx, {
+      userId: args.organizationId
+    });
+    await saveMessage(ctx, components.agent, {
+      threadId,
+      message:{
+        role: "assistant",
+        content: "Hello! How can I assist you today?"
+      }
+    })
     const conversationId = await ctx.db.insert("conversations", {
       threadId,
       organizationId: args.organizationId,
@@ -40,10 +51,19 @@ export const getOne = query({
         message: "Invalid or expired contact session",
       });
     }
-    
+
     const conversation = await ctx.db.get(args.conversationId);
     if (!conversation) {
-      return null;
+      throw new ConvexError({
+        code: "UNAUTHORIZED",
+        message: "Conversation not found",
+      });
+    }
+    if(conversation.contactSessionId !== session._id) {
+      throw new ConvexError({
+        code: "UNAUTHORIZED",
+        message: "Invalid contact session",
+      });
     }
     //since this is a public api, we should not return sensitive information. Only return what is necessary for the widget to function
     return {
