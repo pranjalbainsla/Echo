@@ -138,11 +138,13 @@ export const WidgetChatScreen = () => {
                 <AIMessageContent>
                   <AIResponse>{message.content}</AIResponse>
                 </AIMessageContent>
+                {message.role === "assistant" && (
                 <DicebearAvatar
                   imageUrl="/logo.svg"
                   seed="assistant"
                   size={32}
                 />
+                )}
               </AIMessage>
             )
           })}
