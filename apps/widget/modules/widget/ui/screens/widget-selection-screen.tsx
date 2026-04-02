@@ -4,6 +4,7 @@ import { Button } from "@workspace/ui/components/button";
 import { api } from "@workspace/backend/_generated/api";
 import { MessageSquareTextIcon, ChevronRightIcon } from "lucide-react";
 import { WidgetHeader } from "../components/widget-header";
+import { WidgetFooter } from "../components/widget-footer";
 import { errorMessageAtom, contactSessionIdAtom, organizationIdAtom, screenAtom, conversationIdAtom } from "../../atoms/widget-atoms";
 
 import { useMutation } from "convex/react";
@@ -77,6 +78,7 @@ export const WidgetSelectionScreen = () => {
                 <ChevronRightIcon />
                 </Button>
             </div>
+            <WidgetFooter />
         </>
     );
 };
