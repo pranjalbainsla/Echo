@@ -17,6 +17,7 @@ import { Doc } from "@workspace/backend/_generated/dataModel";
 import { useSetAtom, useAtomValue} from "jotai";
 import { useMemo } from "react";
 import { contactSessionIdAtom, organizationIdAtom } from "../../atoms/widget-atoms";
+import { screenAtom } from "../../atoms/widget-atoms";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -26,6 +27,8 @@ const formSchema = z.object({
   
 
 const WidgetAuthScreen = () => {
+
+  const setScreen = useSetAtom(screenAtom);
   const organizationId = useAtomValue(organizationIdAtom);
 
   const sessionAtom = useMemo(() => contactSessionIdAtom(organizationId ?? ""),
@@ -70,6 +73,7 @@ const WidgetAuthScreen = () => {
     });
   
     setContactSessionId(contactSessionId);
+    setScreen("selection");
   };
 
   return (
